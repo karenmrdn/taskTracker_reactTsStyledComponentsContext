@@ -20,14 +20,22 @@ const App: React.FC = () => {
   };
 
   const toggleTodoStatus = (id: string) => {
-    setTodos((prev) =>
-      prev.map((todo) => {
-        if (todo.id === id) {
-          todo.checked = !todo.checked;
-        }
-        return todo;
-      })
-    );
+    // setTodos((prev) =>
+    //   prev.map((todo) => {
+    //     if (todo.id === id) {
+    //       todo.checked = !todo.checked;
+    //     }
+    //     return todo;
+    //   })
+    // );
+    const updatedTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        todo.checked = !todo.checked;
+      }
+      return todo;
+    });
+    updatedTodos.sort((a, b) => +a.checked - +b.checked);
+    setTodos(updatedTodos);
   };
 
   return (
@@ -47,7 +55,8 @@ const Wrapper = styled.div`
   width: 90%;
   max-width: 400px;
   padding: 2rem;
-  border: 1px solid #000;
+  border: 1px solid #6e0199;
+  border-radius: 12px;
 `;
 
 export default App;

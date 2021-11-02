@@ -16,7 +16,7 @@ const NewTodo: React.FC<NewTodoProps> = (props) => {
   };
 
   return (
-    <form onSubmit={handleAddTodo}>
+    <Form onSubmit={handleAddTodo}>
       <span style={{ fontSize: 26, fontWeight: "bold", color: "#6e0199" }}>
         Todo text
       </span>
@@ -24,7 +24,7 @@ const NewTodo: React.FC<NewTodoProps> = (props) => {
         <input type="text" ref={todoTextRef} />
         <button type="submit">+</button>
       </FormControl>
-    </form>
+    </Form>
   );
 };
 
@@ -43,7 +43,6 @@ const FormControl = styled.div`
   }
 
   & button {
-    outline: none;
     font-size: 24px;
     width: 36px;
     height: 36px;
@@ -58,9 +57,19 @@ const FormControl = styled.div`
     background-color: #9015c0;
   }
 
+  & button:focus {
+    background-color: #9015c0;
+    outline: none;
+  }
+
   & input:focus {
     background-color: #e0d6e4;
   }
+`;
+
+const Form = styled.form`
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ddd;
 `;
 
 export default NewTodo;

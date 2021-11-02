@@ -11,7 +11,7 @@ interface TodosProps {
 
 const Todos: React.FC<TodosProps> = (props) => {
   if (props.todos.length === 0) {
-    return <h4 style={{ textAlign: "center" }}>You have no tasks yet</h4>;
+    return <h3 style={{ textAlign: "center", color: '#6e0199' }}>You have no tasks yet</h3>;
   }
 
   return (
