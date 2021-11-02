@@ -1,29 +1,29 @@
-import React from "react";
-import Todo from "../models/todo";
+import React, { useContext } from "react";
 import TodoItem from "./TodoItem";
 import styled from "styled-components";
+import { TodosContext } from "../store/todosContext";
 
-interface TodosProps {
-  todos: Todo[];
-  onRemoveTodo: (id: string) => void;
-  onToggleTodoStatus: (id: string) => void;
-}
+const Todos: React.FC = (props) => {
+  const todosContext = useContext(TodosContext);
 
-const Todos: React.FC<TodosProps> = (props) => {
-  if (props.todos.length === 0) {
-    return <h3 style={{ textAlign: "center", color: '#6e0199' }}>You have no tasks yet</h3>;
+  if (todosContext.todos.length === 0) {
+    return (
+      <h3 style={{ textAlign: "center", color: "#6e0199" }}>
+        You have no tasks yet
+      </h3>
+    );
   }
 
   return (
     <UnorderedList>
-      {props.todos.map((todo) => (
+      {todosContext.todos.map((todo) => (
         <TodoItem
           key={todo.id}
           id={todo.id}
           text={todo.text}
           checked={todo.checked}
-          onRemoveTodo={props.onRemoveTodo}
-          onToggleTodoStatus={props.onToggleTodoStatus}
+          onRemoveTodo={todosContext.handleRemoveTodo}
+          onToggleTodoStatus={todosContext.toggleTodoStatus}
         />
       ))}
     </UnorderedList>

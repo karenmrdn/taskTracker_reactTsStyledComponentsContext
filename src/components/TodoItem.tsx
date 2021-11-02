@@ -65,6 +65,8 @@ const Button = styled.button`
 `;
 
 const Checkbox = styled.input`
+  margin-right: 8px;
+
   &:focus {
     background-color: #9015c0;
     outline: none;
