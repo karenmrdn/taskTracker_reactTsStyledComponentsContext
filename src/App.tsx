@@ -1,26 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import NewTodo from "./components/NewTodo";
+import Todos from "./components/Todos";
+import Todo from "./models/todo";
+import styled from "styled-components";
 
-function App() {
+const App: React.FC = () => {
+  const [todos, setTodos] = useState([
+    new Todo("Learn React"),
+    new Todo("Learn React Native"),
+    new Todo("Learn JS"),
+  ]);
+
+  const handleAddTodo = (text: string) => {
+    setTodos((prev) => [new Todo(text), ...prev]);
+  };
+
+  const handleRemoveTodo = (id: string) => {
+    setTodos((prev) => prev.filter((todo) => todo.id !== id));
+  };
+
+  const toggleTodoStatus = (id: string) => {
+    setTodos((prev) =>
+      prev.map((todo) => {
+        if (todo.id === id) {
+          todo.checked = !todo.checked;
+        }
+        return todo;
+      })
+    );
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Wrapper>
+      <NewTodo onAddTodo={handleAddTodo} />
+      <Todos
+        todos={todos}
+        onRemoveTodo={handleRemoveTodo}
+        onToggleTodoStatus={toggleTodoStatus}
+      />
+    </Wrapper>
   );
-}
+};
+
+const Wrapper = styled.div`
+  margin: 2rem auto;
+  width: 90%;
+  max-width: 400px;
+  padding: 2rem;
+  border: 1px solid #000;
+`;
 
 export default App;
